@@ -18,5 +18,5 @@ During my recent co-op I worked on the following things:
 ● Developed a web application "LifeYield Internal Portal" for internal use which has all the important information like Employee's directory and maintaining it in an SQL database, web links to every single company's product to all the environments (dev,QA,Prod) using ASP.net following MVC architectural pattern.
 ● Implemented an audit service to track down all the sent requests and received responses by the user to our company's multi account portfolio software using C#.
 
-Link to my project on heroku
+# Heroku Project Link
 https://webdev-singh-tarunpreet.herokuapp.com/
