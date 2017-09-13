@@ -1,21 +1,17 @@
-Say something about yourself, .e.g., you're a graduate student at Northeastern, past experience, if you are working, projects you've worked on, etc.
-Describe the purpose of repository, e.g., for webdev
-Create links to the following
-Root to the hosted environment on Heroku (or AWS, or OpenShift)
-Link to your project (you might need to come back to this)
-Link to your assignment (you might need to come back to this)
+About Me
 My name is Tarunpreet Singh. I am a grad student pursuing my masters in computer science. this is my last semester. I have approximately 3 years of experience 
 little mor than 2 years beofre my masters and 8 months on my co-op. 
 some projects I worked on are as follows:
-Helmuth Labs                                                                                                                                                                           Jan 2016- Apr 2016
+Helmuth Labs
 •	Developed an automated system for Marine and Environmental Science Researchers around the world
  using Python, HTML/CSS and MySQL to fetch the logged data from last 20 years in queried form.
-Web Crawler & Small Search Engine                                                                                                                                   Sept 2015-Oct 2016
+ 
+Web Crawler & Small Search Engine 
 •	Developed the web crawler using Python and elastic search. The crawler crawls the links within links of a  
 particular webpage till it reaches certain depth. Search Engine was information retrieval system and index of web 
 pages (CACM Corpus). The output of this search engine is a list of documents ranked for the given set of queries as input.
-PageRank & BM25 Algorithm                                                                                                                                                Nov 2016- Dec 2016                                                                                                                     
-●	Implemented PageRank & BM25 algorithm using Python. PageRank calculates the rank of the webpage depending 
+
+PageRank & BM25 Algorithm                                                                                                                       ●	Implemented PageRank & BM25 algorithm using Python. PageRank calculates the rank of the webpage depending 
   upon the factors like in links, out links and key phrases. BM25 ranks matching documents according to their relevance
   to a given search query.
   
