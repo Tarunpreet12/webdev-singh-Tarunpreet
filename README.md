@@ -1,4 +1,4 @@
-# AngularFourMEANSeed
+# webdev
 
 After you clone this repository and run "npm install"
 To start the project
