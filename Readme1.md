@@ -1,7 +1,7 @@
 About Me
 
-My name is Tarunpreet Singh. I am a grad student pursuing my masters in computer science. this is my last semester. I have approximately 3 years of experience 
-little mor than 2 years beofre my masters and 8 months on my co-op. 
+My name is Tarunpreet Singh. I am a grad student pursuing my masters in computer science. this is my last semester. I have approximately 3 years of experience a little more than 2 years beofre my masters and 8 months on my co-op. 
+
 some projects I worked on are as follows:
 Helmuth Labs
 •	Developed an automated system for Marine and Environmental Science Researchers around the world
