@@ -1,0 +1,42 @@
+input{
+  margin-bottom: 5px;
+}
+
+
+.glyphicon-user,.glyphicon-play,.glyphicon-eye-open{
+  margin-bottom: 5px;
+  margin-top: 15px ;
+  margin-right: 15px;
+}
+
+.navbar-fixed-top{
+  margin-bottom: 25px;
+
+}
+
+
+
+body {
+  padding-top: 60px;
+  padding-bottom: 50px;
+}
+
+.tps-widget .tps-toolbar{
+  position: absolute;right: 15px;
+  background-color: grey;
+  padding: 7px;
+  border-bottom-left-radius: 10px;
+  opacity: 0.5;
+}
+.tps-widget .tps-content{
+  width: 100%;
+}
+
+.bg-blue-color{
+  background-color: #337ab7;
+}
+
+.white{
+  color: white;
+}
+
