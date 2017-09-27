@@ -13,9 +13,22 @@ input{
   margin-bottom: 25px;
 
 }
+.black{
+  color: black;
+}
+
+.white{
+  color: white;
+}
+
+.content-top-margin{
+  margin-top: 70px;
+}
 
 
-
+.chevron-right-margin{
+margin-right: 10px;
+}
 body {
   padding-top: 60px;
   padding-bottom: 50px;
@@ -36,7 +49,4 @@ body {
   background-color: #337ab7;
 }
 
-.white{
-  color: white;
-}
 
