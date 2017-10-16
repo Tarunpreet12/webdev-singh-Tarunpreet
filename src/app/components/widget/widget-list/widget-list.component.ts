@@ -19,11 +19,10 @@ export class WidgetListComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.widgets = this.widgetService.findWidgetByPageId(this.pageId);
       this.userId = params['uid'];
       this.webId = params['wid'];
       this.pageId = params['pid'];
-
+      this.widgets = this.widgetService.findWidgetByPageId(this.pageId);
     });
 
   }

@@ -57,8 +57,11 @@ import {User} from '../model/user.model.client';
     }
   }
 
-   // deleteUser(userid: String, user: User){
-   //
-   // }
-
+  deleteUser(userId: string) {
+    for (let x = 0; x < this.users.length; x++) {
+      if (this.users[x]._id === userId) {
+        delete this.users[x];
+      }
+    }
+  }
 }

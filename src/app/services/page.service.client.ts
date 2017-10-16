@@ -29,7 +29,6 @@ export class Pageservice {
     const pagedeleted: Page = this.pages.find(function (page) {
       return page._id === pageId;
     });
-
     const index: number = this.pages.indexOf(pagedeleted);
     this.pages.splice(index, 1);
   }

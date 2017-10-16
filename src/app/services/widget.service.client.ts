@@ -3,14 +3,16 @@ import {Widget} from '../model/widget.model.client';
 
 @Injectable()
 export class Widgetservice {
+  constructor() {
+  }
 
   widgets: Widget  [] = [
     new Widget('456', 'HEADING', '321', 2, 'Gizmodo', '', ''),
     new Widget('234', 'HEADING', '321', 4, 'Lorem Ipsum', '', ''),
-    new Widget('456', 'IMAGE', '321', '', '', '100', 'http://lorempixel.com/400/200/'),
-    new Widget('456', 'HTML', '321', '', 'Html content from service', '', ''),
+    new Widget('123', 'IMAGE', '321', '', '', '100', 'http://lorempixel.com/400/200/'),
+    new Widget('345', 'HTML', '321', '', 'Html content from service', '', ''),
     new Widget('567', 'HEADING', '321', 4, 'Lorem Ipsum', '', ''),
-    new Widget('456', 'YOUTUBE', '321', '', '', '100', 'https://www.youtube.com/embed/nhyc5ca3eVw'),
+    new Widget('678', 'YOUTUBE', '321', '', '', '100', 'https://www.youtube.com/embed/nhyc5ca3eVw'),
     new Widget('789', 'HTML', '321', '', 'another html contents', '', '')
   ];
 
@@ -41,6 +43,7 @@ export class Widgetservice {
   }
 
   findWidgetByPageId(pageId: string) {
+    console.log('this is pageid' + pageId);
     return this.widgets.filter(function (widget) {
       return widget.pageId === pageId;
     });
