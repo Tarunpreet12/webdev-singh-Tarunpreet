@@ -5,12 +5,12 @@ import {Widget} from '../model/widget.model.client';
 export class Widgetservice {
 
   widgets: Widget  [] = [
-    new Widget('123', 'HEADING', '321', 2, 'Gizmodo', '', ''),
+    new Widget('456', 'HEADING', '321', 2, 'Gizmodo', '', ''),
     new Widget('234', 'HEADING', '321', 4, 'Lorem Ipsum', '', ''),
-    new Widget('345', 'IMAGE', '321', '', '', '100', 'http://lorempixel.com/400/200/'),
+    new Widget('456', 'IMAGE', '321', '', '', '100', 'http://lorempixel.com/400/200/'),
     new Widget('456', 'HTML', '321', '', 'Html content from service', '', ''),
     new Widget('567', 'HEADING', '321', 4, 'Lorem Ipsum', '', ''),
-    new Widget('678', 'YOUTUBE', '321', '', '', '100', 'https://www.youtube.com/embed/nhyc5ca3eVw'),
+    new Widget('456', 'YOUTUBE', '321', '', '', '100', 'https://www.youtube.com/embed/nhyc5ca3eVw'),
     new Widget('789', 'HTML', '321', '', 'another html contents', '', '')
   ];
 

@@ -4,8 +4,8 @@ import {Page} from '../model/page.model.client';
 @Injectable()
 export class Pageservice {
   pages: Page[] = [
-    new Page('321', 'post1', '123', 'Lorem Ipsum'),
-    new Page('432', 'Blog', '123', 'Lorem Ipsum'),
+    new Page('321', 'post1', '456', 'Lorem Ipsum'),
+    new Page('432', 'Blog', '456', 'Lorem Ipsum'),
     new Page('543', 'post3', '456', 'Lorem Ipsum')
   ];
 
