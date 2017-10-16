@@ -1,0 +1,53 @@
+
+<div class="container fluid">
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <a class=" navbar-brand pull-left chevron-right-margin" [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget','new']">
+      <span class = "glyphicon glyphicon-chevron-left black" style="color: black"></span>
+    </a>
+    <a class="navbar-brand" href="#">Widget-Youtube</a>
+    <a class=" navbar-brand pull-right"  (click)="createWidget()"
+       [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget']">
+      <span class = "glyphicon glyphicon-ok black"></span>
+    </a>
+
+  </nav>
+
+  <div class="container-fluid content-top-margin">
+    <label for="username">Name</label>
+    <input
+      placeholder="widget Name"
+      type = "text"
+      id = "username"
+      class=" form-control"/>
+    <label for="text">Text</label>
+    <input [(ngModel)]='text'
+           name="text"
+      placeholder="Description"
+      type = "text"
+      id = "text"
+      class=" form-control"/>
+    <label for="URL">URL</label>
+    <input [(ngModel)]='url' name="url"
+      placeholder="https://www.youtube.com"
+      type = "text"
+      id = "URL"
+      class=" form-control"/>
+    <label for="username">Width</label>
+    <input [(ngModel)]='width' name="width"
+      placeholder="100%"
+      type = "text"
+      id = "Width"
+      class=" form-control"/>
+    <a (click)="deleteWidget()"
+       [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget']"  class="btn btn-danger btn-block">Delete</a>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <a [routerLink]="['/user',userId]" class="pull-right">
+        <span class="glyphicon-user glyphicon"></span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+

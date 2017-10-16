@@ -1,0 +1,30 @@
+
+<div class="container fluid">
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <a class=" navbar-brand pull-left chevron-right-margin" [routerLink]="['/user',userId,'website']">
+      <span class = "glyphicon glyphicon-chevron-left black" ></span>
+    </a>
+    <a class="navbar-brand">Page list</a>
+    <a class=" navbar-brand pull-right" [routerLink]="['/user',userId,'website',websiteId,'page','new']" >
+      <span class = "glyphicon glyphicon-plus black"></span>
+    </a>
+
+  </nav>
+  <div class="container-fluid content-top-margin">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let p of pages" >
+        <a [routerLink]="['/user',userId,'website', websiteId, 'page', p._id,'widget']"><b>{{p.name}}</b> </a>
+        <a [routerLink]="['/user',userId,'website',websiteId,'page',p._id]"> <span class="pull-right glyphicon glyphicon-cog"></span></a>
+      </li>
+    </ul>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <a [routerLink]="['/user',userId]" class="pull-right">
+        <span class="glyphicon-user glyphicon"></span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+

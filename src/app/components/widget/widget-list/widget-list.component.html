@@ -1,0 +1,54 @@
+
+<div class ="container-fluid">
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <a class=" navbar-brand pull-left chevron-right-margin"[routerLink]="['/user',userId,'website',webId,'page']">
+      <span class = "glyphicon glyphicon-chevron-left black black"></span>
+    </a>
+    <a class="navbar-brand">Widgets</a>
+    <a class=" navbar-brand pull-right"[routerLink]="['/user',userId,'website',webId,'page',pageId,'widget','new']">
+      <span class = "glyphicon glyphicon-plus black"></span>
+    </a>
+  </nav>
+
+
+
+  <div *ngFor="let widget of widgets">
+  <div class="tps-widget">
+    <div class="tps-toolbar">
+      <a [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget',widget._id]"> <span class="glyphicon glyphicon-cog"></span></a>
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </div>
+  </div>
+
+
+    <div [ngSwitch]="widget.widgetType">
+
+    <div *ngSwitchCase="'HEADING'">
+    <h2>{{widget.text}}</h2>
+  </div>
+
+
+    <div *ngSwitchCase="'IMAGE'">
+      <img [style.width]="widget.width+'%'" height="300"
+           [src]="SafeUrl(widget.url)">
+  </div>
+
+    <div *ngSwitchCase= "'YOUTUBE'">
+      <iframe [style.width]="widget.width+'%'" height="300" [src]= "SafeUrl(widget.url)"> </iframe>
+  </div>
+
+      <div *ngSwitchCase="'HTML'">
+        <p> {{widget.text}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+
+    <a [routerLink]="['/user',userId]" class="pull-right">
+      <span class="glyphicon-user glyphicon"></span>
+    </a>
+  </nav>
+</div>

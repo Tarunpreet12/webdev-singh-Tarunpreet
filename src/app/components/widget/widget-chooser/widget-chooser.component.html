@@ -1,0 +1,47 @@
+
+<div class="container fluid">
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <a class=" navbar-brand pull-left chevron-right-margin" [routerLink]="['/user',userId,'website',websiteId,'page',pageId,'widget']">
+      <span class = "glyphicon glyphicon-chevron-left black"></span>
+    </a>
+    <a class="navbar-brand" href="#">Widget-chooser</a>
+    <a class=" navbar-brand pull-right" [routerLink]="['/user',userId,'website',websiteId,'page',pageId,'widget']">
+      <span class = "glyphicon glyphicon-ok black"></span>
+    </a>
+
+  </nav>
+
+  <div class="container-fluid content-top-margin">
+    <ul class = "list-group ">
+      <li class="list-group-item ">
+
+        <a [routerLink]="['/user',userId,'website',websiteId,'page',pageId,'widget','new','heading']">
+          Header
+        </a>
+      </li>
+      <li class="list-group-item">
+
+        <a [routerLink]="['/user',userId,'website',websiteId,'page',pageId,'widget','new','youtube']">
+          Youtube
+        </a>
+      </li>
+
+      <li class="list-group-item">
+
+        <a  [routerLink]="['/user',userId,'website',websiteId,'page',pageId,'widget','new','image']">
+          Image
+        </a>
+      </li>
+
+    </ul>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <a [routerLink]="['/user',userId]" class="pull-right">
+        <span class="glyphicon-user glyphicon"></span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+

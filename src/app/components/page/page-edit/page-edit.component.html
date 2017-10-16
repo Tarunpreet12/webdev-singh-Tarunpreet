@@ -1,0 +1,39 @@
+
+<div class="container fluid">
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <a class=" navbar-brand pull-left chevron-right-margin" [routerLink]="['/user',userId,'website',websiteId,'page']">
+      <span class = "glyphicon glyphicon-chevron-left black"></span>
+    </a>
+    <a class="navbar-brand">Edit Page</a>
+    <a class=" navbar-brand pull-right" (click)="updatePage() "[routerLink]="['/user',userId,'website',websiteId,'page']" >
+      <span class = "glyphicon glyphicon-ok black" ></span>
+    </a>
+
+  </nav>
+
+  <div class="container-fluid content-top-margin">
+    <label for="name">Name</label>
+    <input [(ngModel)]="name"
+      placeholder="Blog post"
+      type = "text"
+      id = "name"
+      class=" form-control"/>
+    <label for="description">Title</label>
+    <input [(ngModel)]= "description"
+           name="description"
+      placeholder="Page Title"
+      type = "text"
+      id = "description"
+      class=" form-control"/>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <a [routerLink]="['/user',userId]" class="pull-right">
+        <span class="glyphicon-user glyphicon"></span>
+      </a>
+    </nav>
+    <a (click)="deletePage()"  [routerLink]="['/user',userId,'website',websiteId,'page']" class="btn btn-danger btn-block">Delete</a>
+  </div>
+</div>
+
+
