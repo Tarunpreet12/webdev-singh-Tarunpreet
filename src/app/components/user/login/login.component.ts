@@ -23,16 +23,23 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private userService: Userservice) {}
 
   login() {
+    console.log('loutside login');
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    const user: User = this.userService.finduserByCredentials(this.username, this.password);
-    if (user) {
-      this.router.navigate(['user', user._id]);
-    }
-    this.errorFlag = true;
+    this.userService.finduserByCredentials(this.username, this.password)
+      .subscribe((data: any) => {
+          console.log(data + 'I am here in component');
+          this.errorFlag = false;
+          this.router.navigate(['/user/', data._id]);
+          },
+        (error: any) => {
+          this.errorFlag = true;
+        });
   }
+
+
   ngOnInit() {
 
   }
+  }
 
-}

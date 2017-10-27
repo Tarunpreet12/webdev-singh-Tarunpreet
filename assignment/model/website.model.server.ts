@@ -1,8 +1,8 @@
 export class Website {
-  _id: string;
-  name: string;
-  developerId: string;
-  description: string;
+  _id: String;
+  name: String;
+  developerId: String;
+  description: String;
 
   constructor(_id, name, developerId, description){
     this._id = _id;

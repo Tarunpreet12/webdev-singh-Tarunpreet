@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Userservice} from '../../../services/user.service.client';
 import {User} from '../../../model/user.model.client';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable' ;
 
 
 @Component({
@@ -12,19 +14,38 @@ import {User} from '../../../model/user.model.client';
 export class ProfileComponent implements OnInit {
   userId: String;
   user: User;
+  username: String;
+  email: String;
+  firstname: String;
+  lastname: String;
 
-  constructor(private route: ActivatedRoute, private  userService: Userservice) { }
+  constructor(private route: ActivatedRoute , private router: Router, private  userService: Userservice) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe( params => {
       this.userId = params['uid'];
     });
+    this.userService.findUserById(this.userId).subscribe(
+      (data: any) => {
+        this.username = data.username;
+        this.email = data.email;
+        this.firstname = data.firstName;
+        this.lastname = data.lastName; },
+      (error: any) => {
+        return Observable.throw(error);
+      }
 
-    this.user = this.userService.findUserById(this.userId);
+    );
   }
 
-  userUpdate() {
-    this.userService.updateUser(this.userId, this.user);
+  updateUser() {
+    this.userService.updateUser(this.userId, this.user)
+      .subscribe((user: any) => {
+          this.router.navigate(['/user/', this.userId]);
+        },
+        (error: any) => {
+        });
   }
 
 }

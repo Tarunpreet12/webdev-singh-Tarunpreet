@@ -7,8 +7,7 @@
     </a>
     <a class="navbar-brand" >Widget-heading</a>
 
-    <a class=" navbar-brand pull-right" (click)="createWidget()"
-       [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget']">
+    <a class=" navbar-brand pull-right" (click)="createWidget()">
       <span class = "glyphicon glyphicon-ok black"></span>
     </a>
 
@@ -36,11 +35,10 @@
       id = "URL"
       class=" form-control"/>
 
-    <a (click)="deleteWidget()"
-       [routerLink]="['/user',userId,'website',webId,'page',pageId,'widget']" class="btn btn-danger btn-block">Delete</a>
+    <a (click)="deleteWidget()" class="btn btn-danger btn-block">Delete</a>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
-      <a [routerLink]="['/user/',userId]" class="pull-right">
+      <a [routerLink]="['/user',userId]" class="pull-right">
         <span class="glyphicon-user glyphicon"></span>
       </a>
     </nav>

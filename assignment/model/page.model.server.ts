@@ -1,12 +1,13 @@
-export class Website {
+
+export class Page {
   _id: string;
   name: string;
-  developerId: string;
+  websiteId: string;
   description: string;
 
-  constructor(_id, name, developerId, description){
+  constructor(_id, name, websiteId, description) {
     this._id = _id;
-    this.developerId = developerId;
+    this.websiteId = websiteId;
     this.description = description;
     this.name = name;
   }

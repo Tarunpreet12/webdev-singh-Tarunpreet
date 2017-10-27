@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {Userservice} from '../../../services/user.service.client';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
+import {Userservice} from '../../../services/user.service.client';
 import {User} from '../../../model/user.model.client';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,39 +10,50 @@ import {User} from '../../../model/user.model.client';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('f') registrationForm: NgForm;
+
+  @ViewChild('f') registerForm: NgForm;
   username: string;
   password: string;
-  verifyPassword: string;
+  password2: string;
   errorFlag: boolean;
   dupFlag: boolean;
-  errorMsg = 'Password does not match';
+  errorMsg = 'Password does not match !';
   dupUserMsg = 'User Already Exists';
-  user: User;
-  constructor(private router: Router, private userService: Userservice) { }
+  newuser= { };
 
-  ngOnInit() {
-
-  }
+  constructor(private router: Router, private userService: Userservice) {}
 
   register() {
-    this.username = this.registrationForm.value.username;
-    this.password = this.registrationForm.value.password;
-    this.verifyPassword = this.registrationForm.value.verifyPassword;
-    const user: User = this.userService.findUserByUsername(this.username);
-    if (user)  {
-      this.dupFlag = true;
-    } else if (this.password !== this.verifyPassword) {
-      this.errorFlag = true;
-      this.errorMsg = 'password does not match';
-    } else {
-      const newUser: User = new User('', '', '', '', '', '');
-      newUser.username = this.username;
-      newUser.password = this.password;
-      const id: String = this.userService.createuser(newUser);
-      this.router.navigate(['/user', id]);
+    this.username = this.registerForm.value.username;
+    this.password = this.registerForm.value.password;
+    this.password2 = this.registerForm.value.password2;
+    // if (this.password !== this.password2) {
+    //   this.errorFlag = true;
+    //   return;
+    // }
+    this.userService.findUserByUsername(this.username)
+      .subscribe((user: any) => {
+          if ( user) {
+            this.dupFlag = true;
+          }
 
-    }
+        },
+        (error: any) => {
+          const newUser: User = new User('', '', '', '', '', '');
+          newUser.username = this.username;
+          newUser.password = this.password;
+          this.userService.createUser(newUser)
+            .subscribe((user: any) => {
+                this.router.navigate(['/user/', user.id]);
+              },
+              (error1: any) => {
+                console.error('Error creating profile');
+              });
+        }
+      );
+
+  }
+  ngOnInit() {
   }
 
 }

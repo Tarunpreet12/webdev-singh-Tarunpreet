@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Widgetservice} from '../../../../services/widget.service.client';
 import {Widget} from '../../../../model/widget.model.client';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-widget-image',
   templateUrl: './widget-image.component.html',
@@ -17,7 +17,7 @@ export class WidgetImageComponent implements OnInit {
   url:  string;
   widgetId: string;
   widget: Widget;
-  constructor( private route: ActivatedRoute, private widgetService: Widgetservice) { }
+  constructor( private route: ActivatedRoute, private router: Router, private widgetService: Widgetservice) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -27,10 +27,14 @@ export class WidgetImageComponent implements OnInit {
       this.widgetId = params['wgid'];
     });
     if (this.widgetId) {
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
-      this.width = this.widget.width;
-      this.url = this.widget.url;
-      this.text = this.widget.text;
+      this.widgetService.findWidgetById(this.widgetId)
+        .subscribe((widget: any) => {
+          this.widget = widget;
+          this.width = this.widget.width;
+          this.url = this.widget.url;
+        }, (error: any) => {
+
+        });
     }
   }
 
@@ -41,20 +45,30 @@ export class WidgetImageComponent implements OnInit {
         'text': this.text,
         'width': this.width,
         'url': this.url},
-        this.widgetId);
+        this.widgetId)
+        .subscribe((widgets: any) => {
+          this.router.navigate(['/user/', this.userId, 'website', this.webId, 'page', this.pageId, 'widget']);
+        }, (error: any) => {});
     } else {
       this.widgetService.createWidget({
         'type': 'IMAGE',
         'text': this.text,
         'width': this.width,
         'url': this.url
-      }, this.pageId);
+      }, this.pageId)
+        .subscribe((widgets: any) => {
+          this.router.navigate(['/user/', this.userId, 'website', this.webId, 'page', this.pageId, 'widget']);
+        }, (error: any) => {});
+
     }
   }
 
   deleteWidget() {
     if (this.widgetId) {
-      this.widgetService.deleteWidget(this.widgetId);
+      this.widgetService.deleteWidget(this.widgetId)
+        .subscribe((widgets: any) => {
+          this.router.navigate(['/user/', this.userId, 'website', this.webId, 'page', this.pageId, 'widget']);
+        }, (error: any) => {});
     }
 
   }

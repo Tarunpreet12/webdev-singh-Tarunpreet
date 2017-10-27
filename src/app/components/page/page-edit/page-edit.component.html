@@ -6,7 +6,7 @@
       <span class = "glyphicon glyphicon-chevron-left black"></span>
     </a>
     <a class="navbar-brand">Edit Page</a>
-    <a class=" navbar-brand pull-right" (click)="updatePage() "[routerLink]="['/user',userId,'website',websiteId,'page']" >
+    <a class=" navbar-brand pull-right" (click)="updatePage()">
       <span class = "glyphicon glyphicon-ok black" ></span>
     </a>
 
@@ -32,7 +32,7 @@
         <span class="glyphicon-user glyphicon"></span>
       </a>
     </nav>
-    <a (click)="deletePage()"  [routerLink]="['/user',userId,'website',websiteId,'page']" class="btn btn-danger btn-block">Delete</a>
+    <a (click)="deletePage()"  class="btn btn-danger btn-block">Delete</a>
   </div>
 </div>
 
