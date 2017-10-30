@@ -40,7 +40,6 @@ function findUserByUsername(req, res) {
 }
 
   function finduserByCredentails(req,res){
-    console.log('yes');
     var username = req.query['username'];
     var password = req.query['password'];
     for(var i=0;i<=users.length;i++)

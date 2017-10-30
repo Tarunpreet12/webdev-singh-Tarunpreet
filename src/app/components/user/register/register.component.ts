@@ -27,10 +27,6 @@ export class RegisterComponent implements OnInit {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
     this.password2 = this.registerForm.value.password2;
-    // if (this.password !== this.password2) {
-    //   this.errorFlag = true;
-    //   return;
-    // }
     this.userService.findUserByUsername(this.username)
       .subscribe((user: any) => {
           if ( user) {

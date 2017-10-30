@@ -18,7 +18,6 @@ import { environment } from '../../environments/environment';
 
 
   finduserByCredentials(username: String, password: String): Observable <any> {
-    console.log('I am in service client');
     const url =  this.baseUrl + '/api/user?username=' + username + '&password=' + password;
     return this.http.get(url)
       .map(
