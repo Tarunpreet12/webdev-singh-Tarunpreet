@@ -24,7 +24,7 @@ function findUserById(req, res) {
   function findUser(req, res){
     var username = req.query['username'];
     var password = req.query['password'];
-    if(userName && password) {
+    if(username && password) {
       finduserByCredentails(req, res);
     }else if (username) {
       findUserByUsername(req, res);

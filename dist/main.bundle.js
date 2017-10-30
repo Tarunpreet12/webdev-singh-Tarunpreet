@@ -691,7 +691,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container-fluid\">\n  <div *ngIf=\"errorFlag\"\n       class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <h1>Login</h1>\n  <h2>login 2</h2>\n<form (ngSubmit)=\"login()\" #f=\"ngForm\">\n\n  <input\n         placeholder=\"username\"\n         name=\"username\"\n         type=\"text\"\n         class=\"form-control\"\n         ngModel\n         required\n         #username= \"ngModel\"/>\n  <span class=\"help-block\" *ngIf=\"!username.valid && username.touched\">\n      Please enter username!\n   </span>\n\n\n  <input\n         placeholder=\"password\"\n         name=\"password\"\n         type=\"password\"\n         class=\"form-control\"\n         ngModel\n         required\n         #password = \"ngModel\"/>\n  <span class=\"help-block\" *ngIf=\"!password.valid && password.touched\">\n      Please enter Password!\n   </span>\n\n  <button class=\"btn btn-primary btn-block\"\n     type=\"submit\"\n     [disabled]= \"!f.valid\">Login</button>\n\n  <button class=\"btn btn-success btn-block\" routerLink=\"/register\">Register</button>\n</form>\n\n\n</div>\n\n"
+module.exports = "\n<div class=\"container-fluid\">\n  <div *ngIf=\"errorFlag\"\n       class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <h1>Login</h1>\n<form (ngSubmit)=\"login()\" #f=\"ngForm\">\n\n  <input\n         placeholder=\"username\"\n         name=\"username\"\n         type=\"text\"\n         class=\"form-control\"\n         ngModel\n         required\n         #username= \"ngModel\"/>\n  <span class=\"help-block\" *ngIf=\"!username.valid && username.touched\">\n      Please enter username!\n   </span>\n\n\n  <input\n         placeholder=\"password\"\n         name=\"password\"\n         type=\"password\"\n         class=\"form-control\"\n         ngModel\n         required\n         #password = \"ngModel\"/>\n  <span class=\"help-block\" *ngIf=\"!password.valid && password.touched\">\n      Please enter Password!\n   </span>\n\n  <button class=\"btn btn-primary btn-block\"\n     type=\"submit\"\n     [disabled]= \"!f.valid\">Login</button>\n\n  <button class=\"btn btn-success btn-block\" routerLink=\"/register\">Register</button>\n</form>\n\n\n</div>\n\n"
 
 /***/ }),
 
@@ -2246,7 +2246,7 @@ var _a;
 // The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false,
-    baseUrl: 'http://127.0.0.1:3100'
+    baseUrl: 'http://localhost:3100'
 };
 //# sourceMappingURL=environment.js.map
 

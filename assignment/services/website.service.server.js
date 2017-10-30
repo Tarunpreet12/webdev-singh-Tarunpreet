@@ -6,8 +6,8 @@ module.exports= function (app) {
   app.delete("/api/website/:websiteId", deleteWebsite);
 
 
-  var websites = [{_id:"123",name:"facebook",developerId:"345",description:"social media"},
-                  {_id:"234",name:"edx",developerId:"345",description:"education"},
+  var websites = [{_id:"123",name:"facebook",developerId:"456",description:"social media"},
+                  {_id:"234",name:"edx",developerId:"456",description:"education"},
                   {_id:"456",name:"instagram",developerId:"345",description:"picutres gallery"},
                   {_id:"678",name:"snapchat",developerId:"789",description:" snap video"}];
 
