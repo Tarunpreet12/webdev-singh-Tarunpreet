@@ -725,12 +725,10 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.login = function () {
         var _this = this;
-        console.log('loutside login');
         this.username = this.loginForm.value.username;
         this.password = this.loginForm.value.password;
         this.userService.finduserByCredentials(this.username, this.password)
             .subscribe(function (data) {
-            console.log(data + 'I am here in component');
             _this.errorFlag = false;
             _this.router.navigate(['/user/', data._id]);
         }, function (error) {
@@ -914,10 +912,6 @@ var RegisterComponent = (function () {
         this.username = this.registerForm.value.username;
         this.password = this.registerForm.value.password;
         this.password2 = this.registerForm.value.password2;
-        // if (this.password !== this.password2) {
-        //   this.errorFlag = true;
-        //   return;
-        // }
         this.userService.findUserByUsername(this.username)
             .subscribe(function (user) {
             if (user) {
@@ -2029,7 +2023,6 @@ var Userservice = (function () {
         this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     Userservice.prototype.finduserByCredentials = function (username, password) {
-        console.log('I am in service client');
         var url = this.baseUrl + '/api/user?username=' + username + '&password=' + password;
         return this.http.get(url)
             .map(function (response) {
@@ -2239,14 +2232,9 @@ var _a;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-// The file contents for the current environment will overwrite these during build.
 var environment = {
-    production: false,
-    baseUrl: 'http://localhost:3100'
+    production: true,
+    baseUrl: ''
 };
 //# sourceMappingURL=environment.js.map
 
