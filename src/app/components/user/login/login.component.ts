@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private userService: Userservice) {}
 
   login() {
+    console.log('I am in component');
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
     this.userService.finduserByCredentials(this.username, this.password)

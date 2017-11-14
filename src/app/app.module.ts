@@ -6,8 +6,7 @@ import { TestComponent } from './components/test/test.component';
 import {Routing} from './app.routing';
 import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
-
-
+import {QuillEditorModule} from 'ngx-quill-editor';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -27,11 +26,16 @@ import {TestService} from './services/test.service.client';
 import {Userservice} from './services/user.service.client';
 import {WebsiteService} from './services/website.service.client';
 import {Pageservice} from './services/page.service.client';
+import {FlickrService} from './services/flickr.service.client';
 import {Widgetservice} from './services/widget.service.client';
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
+import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+
 
 @NgModule({
-  // Declare components here
   declarations: [
+
     AppComponent,
     HomeComponent,
     TestComponent,
@@ -49,16 +53,20 @@ import {Widgetservice} from './services/widget.service.client';
     WidgetListComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    WidgetTextComponent,
+    WidgetHtmlComponent,
+    FlickrImageSearchComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    Routing
+    Routing,
+    QuillEditorModule
   ],
   // Client Side services here
-  providers: [ TestService, Userservice, WebsiteService, Pageservice, Widgetservice],
+  providers: [ TestService, Userservice, WebsiteService, Pageservice, Widgetservice, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

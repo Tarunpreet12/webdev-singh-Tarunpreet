@@ -18,6 +18,7 @@ import { environment } from '../../environments/environment';
 
 
   finduserByCredentials(username: String, password: String): Observable <any> {
+    console.log('I am in client');
     const url =  this.baseUrl + '/api/user?username=' + username + '&password=' + password;
     return this.http.get(url)
       .map(
@@ -26,7 +27,7 @@ import { environment } from '../../environments/environment';
         });
   }
 
-  createUser(user: User): Observable <any> {
+  createUser(user: any): Observable <any> {
     const url = this.baseUrl + '/api/user';
     return this.http.post(url, user)
       .map(

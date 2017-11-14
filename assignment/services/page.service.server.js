@@ -1,80 +1,59 @@
 module.exports= function (app) {
+
+  var pageModel = require("../model/page/page.model.server");
   app.post("/api/website/:websiteId/page",createPage);
   app.get("/api/website/:websiteId/page" ,findPageByWebsiteId);
   app.get("/api/page/:pageId",findPageByID);
   app.put("/api/page/:pageId",updatePage);
   app.delete("/api/page/:pageId",deletePage);
-  var pages = [
-    {_id:"321",name:"post1",websiteId:"123",description:"Lorem NVLFNB"},
-    {_id:"432",name:"Blog",websiteId:"123",description:"Lorem 124 5325"},
-    {_id:"313",name:"post3",websiteId:"123",description:"Lorem sdjslaf"}
-  ];
+  // var pages = [
+  //   {_id:"321",name:"post1",websiteId:"123",description:"Lorem NVLFNB"},
+  //   {_id:"432",name:"Blog",websiteId:"123",description:"Lorem 124 5325"},
+  //   {_id:"313",name:"post3",websiteId:"123",description:"Lorem sdjslaf"}
+  // ];
 
   function  createPage(req,res){
-    var pageId= Math.random().toString();
     var page = req.body;
-    page.websiteId= req.params["websiteId"];
-    page._id = pageId;
-    pages.push(page);
-    res.json({"web_id":page});
+    var websiteId = req.params['websiteId'];
+    pageModel
+      .createPage(websiteId, page)
+      .then(function (page) {
+        pageModel
+          .findPageByWebsiteId(websiteId)
+          .then(function (pages) {
+            res.json(pages);
+          });
+      });
   }
 
   function updatePage(req,res){
 
     var pageId = req.params["pageId"];
     var page = req.body;
-    var update =  pages.find(function (page) {
-      return page._id === pageId;
+    pageModel.updatePage(pageId, page).then(function(updatepage){
+    res.json(updatepage);
     });
-    if(update) {
-      update.name = page.name;
-      update.description = page.description;
-      res.json(update);
-    }
-    else{
-      res.status(404).send({ error: "page cannot be Updated" });
-    }
   }
 
   function  deletePage(req,res){
     var pageId = req.params["pageId"];
-    var page = pages.find(function (page) {
-      return page._id === pageId;
-    });
-
-    if(page) {
-      var index = pages.indexOf(p);
-      pages.splice(index, 1);
-      res.json(page);
-    }
-    else{
-      res.status(404).send({ error: "Unable to delete" });
-    }
+    pageModel.deletePage(pageId).then(function(deletepage){
+      res.json(deletepage);
+    })
   }
 
   function findPageByWebsiteId(req,res){
     var websiteId = req.params["websiteId"];
-    var page = pages.filter(function (page) {
-      return page.websiteId === websiteId;
+    pageModel.findPageByWebsiteId(websiteId).then(function (websiteallpages) {
+      res.json(websiteallpages);
     });
-    if(page){
-      res.json(page);
-    }
-    else{
-      res.status(404).send({ error: "Page not Found for this website" });
-    }
   }
+
   function  findPageByID(req,res) {
     var pageId = req.params["pageId"];
-    var page = pages.find(function (page) {
-      return page._id === pageId;
+    pageModel.findPageByID(pageId).then(function(mypage){
+      res.json(mypage);
     });
-    if(page){
-      res.json(page);
-    }
-    else{
-      res.status(404).send({ error: "Page not Found" });
-    }
   }
 
 }
