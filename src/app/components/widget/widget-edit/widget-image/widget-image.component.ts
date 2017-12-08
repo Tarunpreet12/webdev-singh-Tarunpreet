@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Widgetservice} from '../../../../services/widget.service.client';
 import {Widget} from '../../../../model/widget.model.client';
 import {Router} from '@angular/router';
+import {environment} from '../../../../../environments/environment';
+
 @Component({
   selector: 'app-widget-image',
   templateUrl: './widget-image.component.html',
@@ -17,6 +19,8 @@ export class WidgetImageComponent implements OnInit {
   url:  string;
   widgetId: string;
   widget: Widget;
+  upload: string;
+  baseURL: string = environment.baseUrl;
   constructor( private route: ActivatedRoute, private router: Router, private widgetService: Widgetservice) { }
 
   ngOnInit() {

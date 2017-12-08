@@ -1,39 +1,59 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
 
-<div class="container fluid">
-  <nav class="navbar navbar-default navbar-fixed-top">
-
-    <a class=" navbar-brand pull-left chevron-right-margin" [routerLink]="['/user',userId,'website',websiteId,'page']">
-      <span class = "glyphicon glyphicon-chevron-left black"></span>
-    </a>
-    <a class="navbar-brand">Edit Page</a>
-    <a class=" navbar-brand pull-right" (click)="updatePage()">
-      <span class = "glyphicon glyphicon-ok black" ></span>
-    </a>
-
-  </nav>
-
-  <div class="container-fluid content-top-margin">
-    <label for="name">Name</label>
-    <input [(ngModel)]="name"
-      placeholder="Blog post"
-      type = "text"
-      id = "name"
-      class=" form-control"/>
-    <label for="description">Title</label>
-    <input [(ngModel)]= "description"
-           name="description"
-      placeholder="Page Title"
-      type = "text"
-      id = "description"
-      class=" form-control"/>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <a [routerLink]="['/user',userId]" class="pull-right">
-        <span class="glyphicon-user glyphicon"></span>
+    <!--back mark-->
+    <p class="navbar-text pull-left">
+      <a [routerLink]="['/user/',userId,'website',websiteId,'page']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
-    </nav>
-    <a (click)="deletePage()"  class="btn btn-danger btn-block">Delete</a>
+    </p>
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Edit Page</b>
+      </a>
+    </p>
+
+    <!--plus mark-->
+    <p class="navbar-text pull-right">
+      <a  (click)="updatePage()" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+
   </div>
+</nav>
+
+<div class="body container-fluid">
+
+  <form>
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input [(ngModel)]="name" name="name" required minlength="1"
+             type="text" class="form-control" id="inputName" placeholder="Page Name">
+    </div>
+
+    <div class="form-group">
+      <label for="pageTitle">Title</label>
+      <input [(ngModel)]="description" name="desc"
+             type="text" class="form-control" id="pageTitle" placeholder="Page Title">
+    </div>
+    <a (click)="deletePage()"   class="btn btn-danger btn-block">Delete</a>
+  </form>
+
 </div>
 
 
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user/',userId]">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>

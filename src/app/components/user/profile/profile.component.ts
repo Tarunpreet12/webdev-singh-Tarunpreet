@@ -4,6 +4,7 @@ import {Userservice} from '../../../services/user.service.client';
 import {User} from '../../../model/user.model.client';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable' ;
+import {SharedService} from '../../../services/shared.service.client';
 
 
 @Component({
@@ -12,40 +13,38 @@ import {Observable} from 'rxjs/Observable' ;
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userId: String;
-  user: User;
+  userId: string;
+  user: {};
   username: String;
   email: String;
   firstname: String;
   lastname: String;
 
-  constructor(private route: ActivatedRoute , private router: Router, private  userService: Userservice) {
-  }
+  constructor(private route: ActivatedRoute , private router: Router, private  userService: Userservice, private sharedService: SharedService) {}
 
   ngOnInit() {
-    this.route.params.subscribe( params => {
-      this.userId = params['uid'];
-    });
-    this.userService.findUserById(this.userId).subscribe(
-      (data: any) => {
-        this.username = data.username;
-        this.email = data.email;
-        this.firstname = data.firstName;
-        this.lastname = data.lastName; },
-      (error: any) => {
-        return Observable.throw(error);
-      }
 
-    );
+
+    this.route.params.subscribe(params => {
+      this.user = this.sharedService.user || this.user;
+    });
   }
 
   updateUser() {
     this.userService.updateUser(this.userId, this.user)
-      .subscribe((user: any) => {
+      .subscribe((user: any ) => {
           this.router.navigate(['/user/', this.userId]);
         },
         (error: any) => {
         });
+  }
+
+
+  logout() {
+    this.userService.logout()
+      .subscribe((data: any) => {
+        this.router.navigate(['/login']);
+      });
   }
 
 }

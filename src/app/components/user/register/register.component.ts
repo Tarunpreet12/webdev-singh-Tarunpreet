@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Userservice} from '../../../services/user.service.client';
 import {User} from '../../../model/user.model.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-register',
@@ -21,36 +22,24 @@ export class RegisterComponent implements OnInit {
   dupUserMsg = 'User Already Exists';
   newuser= { };
 
-  constructor(private router: Router, private userService: Userservice) {}
+  constructor(private router: Router, private userService: Userservice, private sharedService:SharedService) {}
 
   register() {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
     this.password2 = this.registerForm.value.password2;
-    if(this.password !== this.password2) {
+    if (this.password !== this.password2) {
       this.errorFlag = true;
       return;
     }
-    this.userService.findUserByUsername(this.username)
-      .subscribe((user: any) => {
-          if ( user) {
-            this.dupFlag = true;
-          }
 
-        },
-        (error: any) => {
-          const newUser = {
-            username : this.username,
-            password : this.password};
-          this.userService.createUser(newUser)
-            .subscribe((user: any) => {
-                this.router.navigate(['/user/', user.id]);
-              },
-              (error1: any) => {
-                console.error('Error creating profile');
-              });
-        }
-      );
+    this.userService.register(this.username, this.password)
+      .subscribe((user: any ) => {
+        console.log(user);
+        this.sharedService.user =  user;
+        this.router.navigate(['profile']);
+      });
+
 
   }
   ngOnInit() {

@@ -1,67 +1,118 @@
 
 
 module.exports = function(app) {
+  var passport = require('passport');
+  var LocalStrategy = require('passport-local').Strategy;
   var userModel = require("../model/user/user.model.server");
 
-  app.post('/api/user' , createUser);
-  app.get('/api/user', findUser);
-  app.get('/api/user/:userId',findUserById );
-  app.put('/api/user/:userId', updateUser);
-  app.delete('api/user/:userId', deleteUser);
-  // var users = [
-  //   {_id: '123', username: 'alice', password: 'alice', firstName: 'Alice', lastName: 'Wonder'},
-  //   {_id: '234', username: 'bob', password: 'bob', firstName: 'Bob', lastName: 'Marley'},
-  //   {_id: '345', username: 'charly', password: 'charly', firstName: 'Charly', lastName: 'Garcia'},
-  //   {_id: '456', username: 'jannunzi', password: 'jannunzi', firstName: 'Jose', lastName: 'Annunzi'}
-  // ];
 
-function findUserById(req, res) {
-  var userId = req.params["userId"];
-  userModel.findUserById(userId).then(function (user) {
-    if (user) {
-      res.json(user);
+  app.post("/api/user",createUser);
+  app.get("/api/user" ,findUserByCredentials);
+  app.get("/api/user/:userId",findUserById);
+  app.put("/api/user/:userId",updateUser);
+  app.post ('/api/login', passport.authenticate('local'), login);
+  app.post('/api/register', register);
+  app.post('/api/logout', logout);
+  app.post('/api/loggedIn', loggedIn);
 
-    }
-    else {
-      res.json({});
-    }
-  });
-}
 
-  function findUser(req, res){
-  console.log('I am in service !!!!!');
-    var username = req.query['username'];
-    var password = req.query['password'];
-    if(username && password) {
-      var promise = userModel.finduserByCredentails(username, password);
-      promise.then(function(user){
+  passport.use(new LocalStrategy(localStrategy));
+
+
+  function login(req, res) {
+    console.log(req.user);
+    var user = req.user;
+    res.json(user);
+  }
+
+  function logout(req, res) {
+    req.logOut();
+    res.send(200);
+  }
+
+  function loggedIn(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
+  }
+
+  function register (req, res) {
+    var user = req.body;
+    userModel
+      .createUser(user)
+      .then(
+        function(user){
+          if(user){
+            req.login(user, function(err) {
+              if(err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          }
+        });
+  }
+
+
+
+  function localStrategy(username, password, done) {
+    userModel
+      .findUserByCredentials(username, password)
+      .then(
+        function(user) {
+          if(user){
+            if(user.username === username && user.password === password) {
+              return done(null, user);
+            }
+          }else {
+            return done(null, false);
+          }
+        },
+        function(err) {
+          if (err) {
+            return done(err); }
+        }
+      );
+  }
+
+
+  function createUser(req,res) {
+    var user = req.body;
+    userModel.createUser(user)
+      .then(function (user) {
         res.json(user);
-        console.log(user);
+      });
+  }
+
+  function findUserByCredentials(req,res) {
+    var username = req.query["username"];
+    var password = req.query["password"];
+
+    if(username && password) {
+
+      var promise = userModel.findUserByCredentials(username,password);
+      promise.then(function (result) {
+        if(result){
+          res.json(result);
+        }
+        else {
+          res.status(404).send({ error: "User not Found" });
+        }
       });
       return;
-    } else if(username) {
-      userModel
-        .findUserByUsername(username)
-        .then(function(user){
-          res.json(user);
-          console.log(user);
-        });
+    }
+    else if(username && !password){ //find user by username
+        var promise = userModel.findUserByUsername(username);
+      promise.then(function (result) {
+        if(result){
+          res.json(result);
+        }
+        else {
+          res.status(404).send({ error: "User not Found" });
+        }
+      });
       return;
-    } else {
-      res.status(404).send({error: "Not found"});
     }
   }
-
-
-  function finduserByCredentails(username,password) {
-    var promise = userModel.finduserByCredentails(username, password);
-    promise.then(function(user){
-      res.json(user);
-      console.log(user);
-    });
-  }
-
-
   function findUserById(req,res){
     var userId = req.params["userId"];
     var promise = userModel.findUserById(userId);
@@ -76,38 +127,37 @@ function findUserById(req, res) {
     return;
   }
 
+  function updateUser(req,res) {
+    var userId=req.params["userId"];
+    var user= req.body;
 
+    userModel.updateUser(userId,user)
+      .then(function (status) {
+        console.log(status);
+        res.send(status);
+      }, function (err) {
+        console.log(err);
+      });
+    return;
+  }
 
-function createUser(req, res) {
-  var newUser = req.body;
-  userModel.createUser(user)
-    .then(function (user) {
-      res.json(user);
-    });
-}
+  passport.serializeUser(serializeUser);
 
+  function serializeUser(user, done) {
+    done(null, user);
+  }
 
+  passport.deserializeUser(deserializeUser);
 
-function updateUser(req, res) {
-  var uid = req.params["userId"];
-  var newUser = req.body;
-  userModel.updateUser(uid,newUser)
-    .then(function (status) {
-      console.log(status);
-      res.send(status);
-    }, function (err) {
-      console.log(err);
-    });
-  return;
-}
-
-function deleteUser(req, res) {
-  var uid = req.params["userId"];
-  userModel
-    .deleteUser(uid)
-    .then(function (user) {
-      res.json(user);
-    });
-}
-
-};
+  function deserializeUser(user, done) {
+    userModel
+      .findUserById(user._id)
+      .then(
+        function(user){
+          done(null, user);
+        },
+        function(err){
+          done(err, null);
+        }
+      );
+  }
