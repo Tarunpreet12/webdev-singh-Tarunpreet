@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private userService: Userservice, private sharedService:SharedService) {}
 
   register() {
+    console.log('I am in componentss');
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
     this.password2 = this.registerForm.value.password2;

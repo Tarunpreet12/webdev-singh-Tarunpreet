@@ -944,6 +944,7 @@ var RegisterComponent = (function () {
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
+        console.log('I am in componentss');
         this.username = this.registerForm.value.username;
         this.password = this.registerForm.value.password;
         this.password2 = this.registerForm.value.password2;
@@ -2502,6 +2503,7 @@ var Userservice = (function () {
         });
     };
     Userservice.prototype.register = function (username, password) {
+        console.log('I am in register client');
         this.options.withCredentials = true;
         var body = {
             username: username,
@@ -2709,9 +2711,14 @@ var _a;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+// The file contents for the current environment will overwrite these during build.
 var environment = {
-    production: true,
-    baseUrl: ''
+    production: false,
+    baseUrl: 'http://localhost:3100'
 };
 //# sourceMappingURL=environment.js.map
 

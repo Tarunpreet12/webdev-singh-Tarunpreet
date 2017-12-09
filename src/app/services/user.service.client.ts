@@ -71,6 +71,7 @@ import {SharedService} from './shared.service.client';
 
 
   register(username: string, password: string) {
+    console.log('I am in register client');
     this.options.withCredentials = true;
 
     const body = {

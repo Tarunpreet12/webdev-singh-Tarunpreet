@@ -6,11 +6,11 @@ module.exports = function(app) {
   var userModel = require("../model/user/user.model.server");
 
 
-  app.post("/api/user",createUser);
-  app.get("/api/user" ,findUserByCredentials);
-  app.get("/api/user/:userId",findUserById);
-  app.put("/api/user/:userId",updateUser);
-  app.post ('/api/login', passport.authenticate('local'), login);
+  app.post("/api/user", createUser);
+  app.get("/api/user", findUserByCredentials);
+  app.get("/api/user/:userId", findUserById);
+  app.put("/api/user/:userId", updateUser);
+  app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/register', register);
   app.post('/api/logout', logout);
   app.post('/api/loggedIn', loggedIn);
@@ -34,15 +34,16 @@ module.exports = function(app) {
     res.send(req.isAuthenticated() ? req.user : '0');
   }
 
-  function register (req, res) {
+  function register(req, res) {
+    console.log(' in service');
     var user = req.body;
     userModel
       .createUser(user)
       .then(
-        function(user){
-          if(user){
-            req.login(user, function(err) {
-              if(err) {
+        function (user) {
+          if (user) {
+            req.login(user, function (err) {
+              if (err) {
                 res.status(400).send(err);
               } else {
                 res.json(user);
@@ -53,29 +54,28 @@ module.exports = function(app) {
   }
 
 
-
   function localStrategy(username, password, done) {
     userModel
       .findUserByCredentials(username, password)
       .then(
-        function(user) {
-          if(user){
-            if(user.username === username && user.password === password) {
+        function (user) {
+          if (user) {
+            if (user.username === username && user.password === password) {
               return done(null, user);
             }
-          }else {
+          } else {
             return done(null, false);
           }
         },
-        function(err) {
+        function (err) {
           if (err) {
-            return done(err); }
+            return done(err);
+          }
         }
       );
   }
 
-
-  function createUser(req,res) {
+  function createUser(req, res) {
     var user = req.body;
     userModel.createUser(user)
       .then(function (user) {
@@ -83,55 +83,56 @@ module.exports = function(app) {
       });
   }
 
-  function findUserByCredentials(req,res) {
+  function findUserByCredentials(req, res) {
     var username = req.query["username"];
     var password = req.query["password"];
 
-    if(username && password) {
+    if (username && password) {
 
-      var promise = userModel.findUserByCredentials(username,password);
+      var promise = userModel.findUserByCredentials(username, password);
       promise.then(function (result) {
-        if(result){
+        if (result) {
           res.json(result);
         }
         else {
-          res.status(404).send({ error: "User not Found" });
+          res.status(404).send({error: "User not Found"});
         }
       });
       return;
     }
-    else if(username && !password){ //find user by username
-        var promise = userModel.findUserByUsername(username);
+    else if (username && !password) { //find user by username
+      var promise = userModel.findUserByUsername(username);
       promise.then(function (result) {
-        if(result){
+        if (result) {
           res.json(result);
         }
         else {
-          res.status(404).send({ error: "User not Found" });
+          res.status(404).send({error: "User not Found"});
         }
       });
       return;
     }
   }
-  function findUserById(req,res){
+
+  function findUserById(req, res) {
     var userId = req.params["userId"];
     var promise = userModel.findUserById(userId);
     promise.then(function (result) {
-      if(result){
+      if (result) {
         res.json(result);
       }
       else {
-        res.status(404).send({ error: "User not Found" });
+        res.status(404).send({error: "User not Found"});
       }
     });
     return;
   }
 
-  function updateUser(req,res) {
-    var userId=req.params["userId"];
-    var user= req.body;
+  function updateUser(req, res) {
+    var userId = req.params["userId"];
+    var user = req.body;
 
-    userModel.updateUser(userId,user)
+    userModel.updateUser(userId, user)
       .then(function (status) {
         console.log(status);
         res.send(status);
@@ -153,11 +154,14 @@ module.exports = function(app) {
     userModel
       .findUserById(user._id)
       .then(
-        function(user){
+        function (user) {
           done(null, user);
         },
-        function(err){
+        function (err) {
           done(err, null);
         }
       );
   }
+
+
+}

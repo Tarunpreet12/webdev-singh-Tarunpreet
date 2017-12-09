@@ -7,7 +7,7 @@
 // params is part of the request. any variables in the path will be available as a a map in params
 
 module.exports = function (app) {
-require("./services/user.service.server.js");
+
 
 };
 
